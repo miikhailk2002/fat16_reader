@@ -17,7 +17,6 @@ void die(const char *msg) {
 }
 
 void fs_read(int fd, size_t offset, void *buffer, size_t len) {
-    // TODO
     lseek(fd,offset,SEEK_SET);
     if(read(fd, buffer, len)==-1){
         exit(EXIT_FAILURE);
@@ -105,7 +104,6 @@ void iterateDirectory(FATData *fatData, DIR_ENT *dir, int level) {
     char name [12] = {0};
     strncpy(name, (char *) dir->name, 11);
     if (!CHECKFLAGS(dir->attr, ATTR_DIR) || strcmp(name, MSDOS_DOT) == 0 || strcmp(name, MSDOS_DOTDOT) == 0) return;
-        //for(int i=0;i<fatData.)
         uint16_t cur = dir->start;
         while(cur != 0xffff){
             for(uint16_t i = 0; i<fatData->sector_size/sizeof(DIR_ENT); i++){
